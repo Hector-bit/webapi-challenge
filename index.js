@@ -145,8 +145,8 @@ server.put('/api/projects/:id/actions/:id', (req, res) => {
     .catch(err => res.status(400).json('bad request'))
 })
 
+const port = process.env.PORT || 4000;
 
-
-server.listen(4000, () => {
+server.listen(port, () => {
     console.log('<=== API IS ON ===>')
 })
