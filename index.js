@@ -25,15 +25,14 @@ server.get('/', (req, res) => {
     res.send('API home is working')
 })
 
-// server.get('/api/projects', (req, res) => {
-//     projects.get(req.body)
-//     console.log('req.body', req.body)
-//     .then(project => {
-//         console.log('project', project)
-//         res.status(200).json(project);
-//     })
-//     .catch(err => res.status(400).json('bad request'))
-// })
+server.get('/api/projects', (req, res) => {
+    projects.get()
+    .then(projects => {
+        // console.log('project', project)
+        res.status(200).json(projects);
+    })
+    .catch(err => res.status(400).json('bad request'))
+})
 
 server.get('/api/projects/:id', (req, res) => {
     projects.get(req.params.id)
