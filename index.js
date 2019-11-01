@@ -12,3 +12,39 @@ I need this code, just don't know where, perhaps should make some middleware, do
 
 Go code!
 */
+
+const express = require('express');
+const server = express();
+const projects = require('./data/helpers/projectModel')
+
+server.use(express.json());
+
+server.get('/', (req, res) => {
+    res.send('API home is working')
+})
+
+// server.get('/api/projects', (req, res) => {
+//     projects.get(req.body)
+//     console.log('req.body', req.body)
+//     .then(project => {
+//         console.log('project', project)
+//         res.status(200).json(project);
+//     })
+//     .catch(err => res.status(400).json('bad request'))
+// })
+
+server.get('/api/projects/:id', (req, res) => {
+    projects.get(req.params.id)
+    .then(project => {
+        if(project){
+            res.status(200).json(project);
+        } else {
+            res.status(404).json('this project does not exist')
+        }
+    })
+    .catch(err => res.status(400).json('bad request'))
+})
+
+server.listen(4000, () => {
+    console.log('<=== API IS ON ===>')
+})
